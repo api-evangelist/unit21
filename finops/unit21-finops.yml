@@ -1,0 +1,80 @@
+name: Unit21 FinOps
+description: >-
+  Financial operations considerations for Unit21 API consumption. Unit21 is an
+  enterprise compliance platform with custom annual contracts. Cost optimization
+  focuses on contract negotiation, right-sizing transaction monitoring volume,
+  and module selection rather than pay-per-call API metering.
+url: https://www.unit21.ai/
+created: "2026-06-13"
+modified: "2026-06-13"
+
+costModel:
+  type: enterprise-subscription
+  billingCycle: annual
+  metering: custom
+  notes: >-
+    Unit21 does not use a public pay-per-call or tiered self-serve pricing
+    model. All costs are governed by negotiated enterprise contracts. Cost
+    drivers typically include transaction event volume, number of monitored
+    entities, analyst seat licenses, and enabled compliance modules.
+
+costDrivers:
+  - name: Transaction Event Volume
+    description: >-
+      Monthly volume of transaction events ingested via the API is a primary
+      cost driver. The platform monitors 4.5 billion monthly events across
+      its customer base.
+  - name: Entity Count
+    description: >-
+      Number of entities (users, businesses) tracked in the platform influences
+      pricing.
+  - name: Analyst Seats
+    description: >-
+      Number of compliance analyst seats with access to the investigation
+      and case management workspace.
+  - name: Compliance Modules
+    description: >-
+      Modules such as device intelligence, sanction screening, real-time
+      payment authorization rules, and regulatory filing (SAR/CTR/goAML)
+      may be priced separately.
+  - name: Contract Length
+    description: >-
+      Multi-year commitments typically yield lower annual rates than
+      single-year contracts.
+
+observedCosts:
+  currency: USD
+  period: annual
+  minimum: 33000
+  average: 157154
+  maximum: 740000
+  source: https://www.vendr.com/buyer-guides/unit21
+
+optimization:
+  strategies:
+    - Negotiate multi-year contracts for volume discounts
+    - Purchase at end of sales quarter for best terms
+    - Offer to participate in case studies or reference programs
+    - Right-size transaction monitoring scope to material risk areas
+    - Use bulk export endpoints to reduce redundant API calls
+    - Leverage sandbox environment for integration testing to avoid
+      production cost implications
+    - Evaluate which compliance modules are required vs. optional
+
+complianceCertifications:
+  - SOC 2 Type I
+  - SOC 2 Type II
+  - GDPR
+  - CCPA
+
+securityCosts:
+  notes: >-
+    Security is included in the enterprise contract. Unit21 provides SOC 2
+    certified infrastructure, penetration testing by Doyensec and Cobalt,
+    256-bit AES encryption at rest, TLS encryption in transit, Auth0 MFA,
+    audit logging, and encrypted daily backups at no additional disclosed cost.
+
+contacts:
+  sales: https://www.unit21.ai/
+  security: security@unit21.ai
+  support: https://support.unit21.ai/hc/en-us

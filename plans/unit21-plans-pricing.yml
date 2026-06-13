@@ -1,0 +1,70 @@
+name: Unit21 Plans and Pricing
+description: >-
+  Unit21 uses custom enterprise pricing based on organization size, transaction
+  volume, and feature requirements. Pricing is not publicly tiered; all plans
+  are negotiated directly with Unit21 sales. The platform is positioned as an
+  enterprise compliance infrastructure solution for fintechs and financial
+  institutions.
+url: https://www.unit21.ai/
+created: "2026-06-13"
+modified: "2026-06-13"
+
+pricing:
+  model: enterprise-custom
+  billingCycle: annual
+  notes: >-
+    Unit21 does not publish self-serve pricing tiers. Contracts are negotiated
+    directly and vary significantly based on transaction volume, number of
+    users, enabled modules, and regulatory filing volume.
+  ranges:
+    - label: Minimum observed contract
+      amount: 33000
+      currency: USD
+      period: annual
+    - label: Average contract value
+      amount: 157154
+      currency: USD
+      period: annual
+    - label: Maximum observed contract
+      amount: 740000
+      currency: USD
+      period: annual
+  sources:
+    - name: Vendr buyer guide
+      url: https://www.vendr.com/buyer-guides/unit21
+    - name: TrustRadius pricing
+      url: https://www.trustradius.com/products/unit21/pricing
+
+plans:
+  - name: Enterprise
+    description: >-
+      Custom-priced enterprise plan covering transaction monitoring, alert
+      management, case management, rule configuration, entity and instrument
+      ingestion, SAR/CTR/STR/goAML regulatory filing, and agentic AI
+      investigation capabilities. Additional modules such as device intelligence,
+      sanction screening, and real-time payment authorization rules may be
+      available as add-ons.
+    type: enterprise
+    pricing: custom
+    features:
+      - Transaction monitoring and event ingestion
+      - Real-time rules and payment authorization
+      - Alert creation, listing, and review
+      - Case management and investigation workspace
+      - Entity and instrument data management
+      - Suspicious Activity Report (SAR) filing
+      - Currency Transaction Report (CTR) filing
+      - goAML regulatory reporting
+      - Agentic AI investigation and narrative drafting
+      - Bulk data export
+      - SOC 2 Type I and Type II compliance
+      - GDPR and CCPA compliance
+      - 256-bit AES encryption at rest and TLS in transit
+      - Multi-factor authentication via Auth0
+      - Dedicated support
+
+negotiationTips:
+  - Multi-year commitments may unlock discounts
+  - End-of-quarter purchases may yield better terms
+  - Case study or reference partnerships may provide pricing flexibility
+  - Average discount through negotiation partners: ~11%

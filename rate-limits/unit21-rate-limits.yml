@@ -1,0 +1,48 @@
+name: Unit21 Rate Limits
+description: >-
+  Unit21 does not publicly document specific API rate limits in their
+  developer documentation. As an enterprise-only platform with custom contracts,
+  rate limits and throughput constraints are negotiated as part of individual
+  service agreements. The API is designed for high-volume ingestion, monitoring
+  4.5 billion monthly events across its customer base. Specific limits should
+  be confirmed with Unit21 during contract negotiation or via enterprise support.
+url: https://docs.unit21.ai/reference/api-reference
+created: "2026-06-13"
+modified: "2026-06-13"
+
+notes:
+  - Unit21 rate limits are not publicly documented and are set per enterprise contract
+  - The platform is designed for high-volume financial transaction monitoring
+  - Real-time rule endpoints handle sub-250ms fraud detection latency
+  - Batch and bulk export endpoints are available for high-volume data ingestion
+  - Contact Unit21 sales or support for specific throughput limits
+
+authentication:
+  type: API Key
+  header: u21-key
+  notes: >-
+    All API requests must be made over HTTPS. Requests without a valid API key
+    will fail. API keys are provisioned per organization name and environment
+    (sandbox vs production).
+
+environments:
+  - name: Sandbox
+    baseURL: https://sandbox1-api.unit21.com/v1
+    notes: For development and testing purposes
+  - name: Production
+    baseURL: https://<org_name>-api.unit21.com/v1
+    notes: Production environment; base URL is organization-specific
+
+encryption:
+  algorithm: 128-bit AES (CBC mode, PKCS7 padding)
+  mac: HMAC-SHA256
+  notes: >-
+    Optional additional payload encryption is available on all API endpoints
+    beyond the mandatory HTTPS/TLS transport encryption.
+
+throttling:
+  documented: false
+  recommendation: >-
+    Consult Unit21 enterprise support for specific rate limit quotas. Use
+    bulk/batch endpoints for large data ingestion workloads to minimize
+    request overhead.

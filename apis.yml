@@ -1,0 +1,94 @@
+aid: unit21
+name: Unit21
+description: >-
+  Unit21 is an agentic AI platform for fraud and AML (Anti-Money Laundering)
+  detection and compliance operations. It provides a REST API for ingesting
+  transaction data, managing detection rules, reviewing alerts, and filing
+  suspicious activity reports (SARs). The platform supports real-time
+  transaction monitoring, case management, entity and instrument tracking,
+  and automated regulatory filing including SARs, STRs, CTRs, and goAML reports.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/unit21/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - Fraud Detection
+  - AML
+  - Anti-Money Laundering
+  - Compliance
+  - FinTech
+  - Transaction Monitoring
+  - Risk
+  - SAR
+  - Financial Crime
+  - Suspicious Activity Reports
+apis:
+  - aid: unit21:unit21-api
+    name: Unit21 API
+    description: >-
+      REST API for ingesting entities, instruments, and transaction events into
+      the Unit21 risk and compliance platform. Enables creation and management
+      of alerts, cases, rules, and suspicious activity reports. Supports
+      real-time transaction monitoring and bulk data exports.
+    humanURL: https://docs.unit21.ai/reference/api-reference
+    baseURL: https://sandbox1-api.unit21.com/v1
+    tags:
+      - Fraud Detection
+      - AML
+      - Transaction Monitoring
+      - Alerts
+      - Cases
+      - Entities
+      - Rules
+      - SAR
+    properties:
+      - type: Documentation
+        url: https://docs.unit21.ai/
+      - type: Reference
+        url: https://docs.unit21.ai/reference/api-reference
+      - type: Authentication
+        url: https://docs.unit21.ai/docs/verification-service-api-keys
+      - type: Encryption
+        url: https://docs.unit21.ai/reference/encryption
+      - type: Endpoints
+        url: https://docs.unit21.ai/reference/endpoint-options
+      - type: SARs
+        url: https://docs.unit21.ai/reference/sars-api
+      - type: RealTimeRules
+        url: https://docs.unit21.ai/docs/real-time-rules
+    contact:
+      - FN: Unit21 Support
+        url: https://support.unit21.ai/hc/en-us
+        email: security@unit21.ai
+common:
+  - type: Website
+    url: https://www.unit21.ai/
+  - type: Documentation
+    url: https://docs.unit21.ai/
+  - type: GitHubOrg
+    url: https://github.com/u21
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/unit21/
+  - type: Blog
+    url: https://www.unit21.ai/resources/risk-compliance-blog
+  - type: Pricing
+    url: https://www.unit21.ai/
+  - type: StatusPage
+    url: https://status.unit21.ai/
+  - type: X
+    url: https://twitter.com/unit21inc
+  - type: Support
+    url: https://support.unit21.ai/hc/en-us
+  - type: Security
+    url: https://www.unit21.ai/security
+  - type: Plans
+    url: plans/unit21-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/unit21-rate-limits.yml
+  - type: FinOps
+    url: finops/unit21-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
