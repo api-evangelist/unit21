@@ -1,0 +1,58 @@
+{
+  "aid": "unit21",
+  "name": "Unit21 Blog",
+  "url": "https://www.unit21.ai/resources/risk-compliance-blog",
+  "fetched": "2026-06-13",
+  "posts": [
+    {
+      "title": "Unit21 named Category Leader by Chartis in Enterprise and Payment Fraud Solutions",
+      "url": "https://www.unit21.ai/blog/unit21-named-category-leader-by-chartis-in-enterprise-and-payment-fraud-solutions",
+      "date": ""
+    },
+    {
+      "title": "AI task spotlight | Edition no. 04: PEP Watchlist Analysis",
+      "url": "https://www.unit21.ai/blog/ai-task-spotlight-edition-no-04-pep-watchlist-analysis",
+      "date": "2026-06-11"
+    },
+    {
+      "title": "What 111 industry voices told FinCEN about the future of AML",
+      "url": "https://www.unit21.ai/blog/what-111-industry-voices-told-fincen-about-the-future-of-aml",
+      "date": "2026-06-10"
+    },
+    {
+      "title": "Best fraud detection software in 2026: An independent analyst review",
+      "url": "https://www.unit21.ai/blog/best-fraud-detection-software-in-2026-an-independent-analyst-review",
+      "date": "2026-06-01"
+    },
+    {
+      "title": "4 ways we've engineered around the AI hallucination problem in financial crime compliance",
+      "url": "https://www.unit21.ai/blog/4-ways-weve-engineered-around-the-ai-hallucination-problem-in-financial-crime-compliance",
+      "date": "2026-05-28"
+    },
+    {
+      "title": "AI task spotlight | Edition no. 03: Customer risk rating analysis",
+      "url": "https://www.unit21.ai/blog/ai-task-spotlight-edition-no-03-customer-risk-rating-analysis",
+      "date": "2026-05-28"
+    },
+    {
+      "title": "Request for Information in AML investigations: How to close the evidence loop",
+      "url": "https://www.unit21.ai/blog/request-for-information-in-aml-investigations-how-to-close-the-evidence-loop",
+      "date": "2026-05-26"
+    },
+    {
+      "title": "FinCEN NPRM 2026: Risk Assessments Are Now Required. Here's How to Build One an Examiner Will Actually Trust",
+      "url": "https://www.unit21.ai/blog/fincen-nprm-2026-risk-assessments-are-now-required-heres-how-to-build-one-an-examiner-will-actually-trust",
+      "date": "2026-05-19"
+    },
+    {
+      "title": "Documenting Your ACH Fraud Detection Program for Nacha 2026",
+      "url": "https://www.unit21.ai/blog/documenting-your-ach-fraud-detection-program-for-nacha-2026",
+      "date": "2026-05-18"
+    },
+    {
+      "title": "What the CLARITY Act means for your bank's AML program",
+      "url": "https://www.unit21.ai/blog/what-the-clarity-act-means-for-your-banks-aml-program",
+      "date": "2026-05-15"
+    }
+  ]
+}

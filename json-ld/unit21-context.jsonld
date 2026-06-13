@@ -1,0 +1,48 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "unit21": "https://www.unit21.ai/",
+    "aid": "https://apis.io/aid",
+    "api": "https://apis.io/api"
+  },
+  "@type": "Organization",
+  "@id": "https://www.unit21.ai/",
+  "name": "Unit21",
+  "description": "Unit21 is an agentic AI platform for fraud and AML (Anti-Money Laundering) detection and compliance operations. It provides a REST API for ingesting transaction data, managing detection rules, reviewing alerts, and filing suspicious activity reports (SARs).",
+  "url": "https://www.unit21.ai/",
+  "sameAs": [
+    "https://github.com/u21",
+    "https://www.linkedin.com/company/unit21/",
+    "https://twitter.com/unit21inc"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "url": "https://support.unit21.ai/hc/en-us",
+    "email": "security@unit21.ai"
+  },
+  "offers": {
+    "@type": "Offer",
+    "description": "REST API for transaction monitoring, fraud detection, AML compliance, alerts, cases, entity management, and suspicious activity reporting."
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://docs.unit21.ai/"
+  },
+  "keywords": [
+    "Fraud Detection",
+    "AML",
+    "Anti-Money Laundering",
+    "Compliance",
+    "FinTech",
+    "Transaction Monitoring",
+    "Risk",
+    "SAR",
+    "Financial Crime",
+    "Suspicious Activity Reports"
+  ],
+  "api:endpoint": "https://sandbox1-api.unit21.com/v1",
+  "api:documentation": "https://docs.unit21.ai/reference/api-reference",
+  "api:authentication": "https://docs.unit21.ai/docs/verification-service-api-keys",
+  "api:status": "https://status.unit21.ai/"
+}
