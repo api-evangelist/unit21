@@ -2,7 +2,7 @@
   "aid": "unit21",
   "name": "Unit21 Blog",
   "url": "https://www.unit21.ai/resources/risk-compliance-blog",
-  "fetched": "2026-06-13",
+  "fetched": "2026-06-14T20:42:17Z",
   "posts": [
     {
       "title": "Unit21 named Category Leader by Chartis in Enterprise and Payment Fraud Solutions",
@@ -54,5 +54,16 @@
       "url": "https://www.unit21.ai/blog/what-the-clarity-act-means-for-your-banks-aml-program",
       "date": "2026-05-15"
     }
-  ]
+  ],
+  "repo": "unit21",
+  "feeds": [
+    {
+      "source": "https://www.linkedin.com/company/unit21/",
+      "feed_url": "https://www.linkedin.com/company/unit21/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0
 }
