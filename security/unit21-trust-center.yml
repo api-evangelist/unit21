@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: searched
+probe: true
+source: https://www.unit21.ai/security
+url: https://www.unit21.ai/security
+certifications:
+- SOC 2
+- GDPR
+evidence:
+- source: https://www.unit21.ai/security
+  keywords:
+  - soc 2
+  - trust center
+  - gdpr

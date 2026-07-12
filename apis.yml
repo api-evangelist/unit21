@@ -63,6 +63,12 @@ apis:
         url: https://support.unit21.ai/hc/en-us
         email: security@unit21.ai
 common:
+  - type: TrustCenter
+    url: security/unit21-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/unit21-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/unit21-domain-security.yml
   - type: Website
     url: https://www.unit21.ai/
   - type: Documentation
