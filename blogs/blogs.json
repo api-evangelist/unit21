@@ -2,13 +2,11 @@
   "repo": "unit21",
   "feeds": [
     {
-      "source": "https://www.unit21.ai/resources/risk-compliance-blog",
-      "feed_url": "",
-      "saved": 2,
-      "method": "agent-scrape"
+      "source": "https://www.linkedin.com/company/unit21/",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T13:18:57Z",
-  "post_count": 6,
-  "agent_pulled": "2026-06-27"
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 9,
+  "agent_pulled": "2026-07-04"
 }
