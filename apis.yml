@@ -23,7 +23,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/unit21.png
 url: https://raw.githubusercontent.com/api-evangelist/unit21/refs/heads/main/apis.yml
 created: "2026-06-13"
-modified: "2026-06-13"
+modified: "2026-08-27"
 specificationVersion: '0.23'
 tags:
   - Fraud Detection
@@ -69,7 +69,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.unit21.ai/
-      - type: Reference
+      - type: APIReference
         url: https://docs.unit21.ai/reference/api-reference
       - type: Authentication
         url: https://docs.unit21.ai/docs/verification-service-api-keys
@@ -96,16 +96,12 @@ common:
     url: https://www.unit21.ai/
   - type: Documentation
     url: https://docs.unit21.ai/
-  - type: GitHubOrg
+  - type: GitHubOrganization
     url: https://github.com/u21
   - type: LinkedIn
     url: https://www.linkedin.com/company/unit21/
   - type: Blog
     url: https://www.unit21.ai/resources/risk-compliance-blog
-  - type: Pricing
-    url: https://www.unit21.ai/
-  - type: StatusPage
-    url: https://status.unit21.ai/
   - type: X
     url: https://twitter.com/unit21inc
   - type: Support
@@ -118,6 +114,56 @@ common:
     url: rate-limits/unit21-rate-limits.yml
   - type: FinOps
     url: finops/unit21-finops.yml
+  - type: TermsOfService
+    url: https://www.unit21.ai/tos
+  - type: PrivacyPolicy
+    url: https://www.unit21.ai/privacy-policy
+  - type: LLMsTxt
+    url: llms/unit21-llms.txt
+  - type: Packages
+    url: packages/unit21-packages.yml
+  - type: Authentication
+    url: authentication/unit21-authentication.yml
+  - type: Conventions
+    url: conventions/unit21-conventions.yml
+  - type: ErrorCatalog
+    url: errors/unit21-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/unit21-lifecycle.yml
+  - type: Conformance
+    url: conformance/unit21-conformance.yml
+  - type: Compliance
+    url: security/unit21-trust-center.yml
+  - type: DataModel
+    url: data-model/unit21-data-model.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-27'
+  status: minimal
+  artifacts_added: 11
+  pass: local-v1
+x-coverage:
+  state: gated
+  reason: customer-only-docs
+  detail: >-
+    Every path on docs.unit21.ai -- the API reference, the release notes, and
+    even nonexistent paths -- now returns the same 7,947-byte "Sign in | Unit21"
+    page asking you to email for an access link, and status.unit21.ai redirects
+    into that same login, so the entire Unit21 developer and operational surface
+    is readable only by existing customers.
+  evidence:
+    - url: https://docs.unit21.ai/reference/api-reference
+      status: 200
+    - url: https://docs.unit21.ai/page/release-notes
+      status: 200
+    - url: https://docs.unit21.ai/docs/nonexistent-zzz-control
+      status: 200
+    - url: http://status.unit21.ai/
+      status: 200
+    - url: https://sandbox1-api.unit21.com/v1/entities/list
+      status: 401
+    - url: https://www.unit21.ai/llms.txt
+      status: 200
+  checked: '2026-08-27'
