@@ -1,0 +1,76 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.unit21.ai/reference/generate-api-keys
+description: >-
+  Unit21 authenticates every API request with a static organization-scoped API
+  key sent in a custom u21-key request header over HTTPS. There is no OAuth 2.0
+  authorization server, no OpenID Connect discovery document and no scope
+  surface -- so scopes/ is deliberately not emitted for this provider. An
+  optional second layer encrypts the request payload itself with a Fernet key
+  supplied in a u21-fernet header.
+provenance_note: >-
+  As of 2026-08-27 every page on docs.unit21.ai returns a 7,947-byte
+  "Sign in | Unit21" HTML gate to an unauthenticated fetch, so the field values
+  below were read from the public search index of those same pages rather than
+  fetched directly, and corroborated against a live probe of the API host. They
+  are recorded as searched, not probed. Anything that could not be corroborated
+  is left null rather than guessed.
+security_schemes:
+  - id: u21-key
+    type: apiKey
+    in: header
+    name: u21-key
+    description: >-
+      Organization-scoped API key. Required on every request; unauthenticated
+      requests fail.
+    scopes: []
+    docs: https://docs.unit21.ai/reference/generate-api-keys
+  - id: u21-fernet
+    type: apiKey
+    in: header
+    name: u21-fernet
+    description: >-
+      Optional payload-encryption key header. When used, the request body is
+      encrypted with Fernet (128-bit AES in CBC mode with PKCS7 padding,
+      authenticated with HMAC-SHA256). Available on all API endpoints.
+    optional: true
+    docs: https://docs.unit21.ai/reference/encryption
+oauth2: false
+openid_connect: false
+mutual_tls: null
+key_management:
+  self_service: true
+  where: >-
+    Unit21 Dashboard -> Data Management -> Integrations tab -> "Request a new
+    key". Administrator privileges required.
+  max_active_keys: 10
+  displayed_once: true
+  stored_by_provider: false
+  rotation_guidance: Unit21 recommends rotating keys every 2-6 months.
+  docs: https://docs.unit21.ai/reference/generate-api-keys
+transport:
+  https_required: true
+  observed:
+    url: https://sandbox1-api.unit21.com/v1/entities/list
+    method: POST
+    status: 401
+    body: '{"error_code":"unauthorized"}'
+    server: awselb/2.0
+    www_authenticate: null
+    note: >-
+      Probed 2026-08-27 without credentials. The edge returns a bare JSON 401
+      with no WWW-Authenticate challenge, so an agent gets no machine-readable
+      hint about which credential to present.
+environments:
+  - name: Sandbox
+    baseURL: https://sandbox1-api.unit21.com/v1
+  - name: Production
+    baseURL: https://{org_name}-api.unit21.com/v1
+    templated: true
+    note: >-
+      The production host is organization-specific and is issued at onboarding;
+      the templated form is the real, correct base and is not a placeholder.
+gaps:
+  - No WWW-Authenticate header on 401, so the auth scheme is not discoverable at runtime.
+  - No /.well-known/openid-configuration or /.well-known/oauth-authorization-server (both 404/401).
+  - The authentication reference itself is behind an email sign-in gate.
