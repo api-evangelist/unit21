@@ -1,0 +1,213 @@
+generated: '2026-08-27'
+method: searched
+source: https://github.com/u21/integration-docs
+description: >-
+  The Unit21 ingestion data model, read from Unit21's own public GitHub
+  organisation. github.com/u21/integration-docs is the Slate source for
+  "Unit21 API integration documentation" and is the ONLY place Unit21's field
+  schema is readable without a login, now that docs.unit21.ai is gated. It is
+  a genuine first-party artifact -- the org resolves to "Unit21 Inc." with
+  blog https://unit21.ai/ via the GitHub API, and the prose names Unit21
+  throughout.
+provenance_caveat: >-
+  READ THIS BEFORE RELYING ON THE FIELD LISTS. The repo describes itself as
+  "NEEDS REVISION" and was last pushed 2022-07-22, so it predates the current
+  v1 API surface and is not authoritative for today's endpoints. Its
+  source/includes/_errors.md is UNEDITED SLATE TEMPLATE BOILERPLATE about a
+  fictional "Kittn API" and was deliberately NOT used to build
+  errors/unit21-problem-types.yml. The three event schemas below, by contrast,
+  are hand-written Unit21 content and are recorded as the historical published
+  data model, not as the current contract.
+model_style: >-
+  Semi-flexible three-tier field schema rather than a fixed object graph.
+  Every event carries REQUIRED fields (event rejected if absent), RESERVED
+  fields (accepted and given first-class risk processing), and CUSTOM fields
+  (any caller-defined key that does not collide with a required or reserved
+  name).
+field_tiers:
+  - tier: required
+    behavior: Event is rejected if the field is absent.
+  - tier: reserved
+    behavior: >-
+      Standard field Unit21 accepts but does not require; modelling data into
+      reserved fields is what unlocks Unit21's advanced processing. Some
+      reserved fields are industry-specific and can be safely ignored.
+  - tier: custom
+    behavior: >-
+      Free-form caller-defined fields for anything else relevant to risk
+      decisioning. Names must not collide with required or reserved names.
+scalar_types: [String, Numeric, Boolean, List]
+type_note: >-
+  Numeric doubles as the timestamp type -- all datetimes are Unix epoch
+  seconds, not RFC 3339 strings.
+entities:
+  - name: User
+    ingested_via: add_user_event
+    identifier: user_id
+    identifier_note: >-
+      May be an empty string when transactions are keyed on instrument instead;
+      in that case txn_instrument_id becomes the linking key.
+    required_fields:
+      - user_id
+      - registration_datetime
+      - date_of_birth
+      - first_name
+      - middle_name
+      - last_name
+      - primary_address
+      - primary_city
+      - primary_state
+      - primary_country
+      - primary_zipcode
+    reserved_fields:
+      - description
+      - username
+      - gender
+      - user_email
+      - ip_address
+      - payment_methods
+      - social_sign_on_types
+      - txn_instrument_id
+      - device_id
+      - user-agent
+      - phone_num
+      - secondary_address
+      - secondary_city
+      - secondary_state
+      - secondary_country
+      - referral_user_id
+      - id_verified
+      - address_verified
+      - phone_verified
+      - email_verified
+    formats:
+      date_of_birth: DD-MM-YYYY
+      registration_datetime: Unix epoch seconds
+      phone_num: E.164
+      primary_country: ISO 3166-1 alpha-2 or full name
+      primary_zipcode: 5-digit ZIP or ZIP+4
+  - name: ActionEvent
+    ingested_via: action_event
+    identifier: event_type + user_id + event_datetime
+    description: >-
+      Non-transaction events that affect risk decisioning, including events
+      raised by unregistered users or by the customer's own staff.
+    required_fields: [event_type, user_id, event_datetime]
+    reserved_fields:
+      - description
+      - ip_address
+      - user_agent
+      - session_id
+      - message_sender
+    enum_event_type:
+      - _USER_LOGIN
+      - _USER_LOGOUT
+      - _USER_ACCESS
+      - _USER_PROFILE_UPDATE
+      - _USER_DELETION
+      - _USER_BLOCKED
+      - _USER_SUSPENDED
+      - _COMMUNICATION
+      - _DISPUTE
+      - _USER_REFERRAL
+      - _PROMOTION_APPLIED
+  - name: TransactionEvent
+    ingested_via: transaction_event
+    identifier: txn_id
+    description: >-
+      Finalized transfers of monetary value. Each stage of a multi-step
+      transaction (authorization, capture, reversal, status change) is
+      dispatched as a DISCRETE event rather than as an update to one record.
+    required_fields:
+      - txn_type
+      - user_id
+      - txn_id
+      - txn_datetime
+      - txn_amount
+      - transaction_status
+    reserved_fields:
+      - ip_address
+      - user_agent
+      - session_id
+      - message_sender
+      - user_email
+      - txn_instrument
+      - post_datetime
+      - currency_code
+      - network_code
+      - authorization_code
+      - merchant_id
+      - merchant_category_code
+      - merchant_country_code
+      - recipient_id
+      - recipient_country_code
+      - preadjusted_txn_amount
+      - internal_auxiliary_fee
+      - external_auxiliary_fee
+      - interchange_fee
+      - user_data_1
+      - user_data_2
+    enum_txn_type:
+      - _P2P_TRANSFER
+      - _PURCHASE
+      - _REFUND
+      - _CORRECTION
+      - _DEBIT
+      - _LOAN_GIVEN
+      - _LOAN_RECEIVED
+      - _LOAN_PAYMENT
+    enum_transaction_status: [COMPLETED, UNPAID, INCOMPLETE, CANCELLED]
+    external_standards_referenced:
+      - ISO 3166-1 alpha-2 (country codes)
+      - ISO 4217 / IBAN currency codes (currency_code)
+      - ISO 18245 merchant category codes (merchant_category_code)
+      - E.164 (phone numbers)
+      - Unix epoch time (all datetimes)
+  - name: TransactionInstrument
+    identifier: txn_instrument_id
+    description: >-
+      Not ingested as a standalone event. An instrument (card, account, store)
+      is materialised from the txn_instrument_id / txn_instrument fields and is
+      the alternate join key between users and transactions.
+relationships:
+  - from: TransactionEvent
+    to: User
+    type: belongs_to
+    via: user_id
+    note: >-
+      user_id names the party most likely to be the perpetrator of malice --
+      the seller in a marketplace trade, the card holder in a card payment, the
+      repayer in a loan. This is a risk convention, not an ownership one, and
+      it is easy to map wrongly.
+  - from: ActionEvent
+    to: User
+    type: belongs_to
+    via: user_id
+  - from: User
+    to: TransactionInstrument
+    type: has_many
+    via: txn_instrument_id
+  - from: TransactionEvent
+    to: TransactionInstrument
+    type: belongs_to
+    via: txn_instrument
+  - from: TransactionEvent
+    to: User
+    type: belongs_to
+    via: recipient_id
+    role: recipient
+  - from: User
+    to: User
+    type: belongs_to
+    via: referral_user_id
+    role: referrer
+join_rule: >-
+  Every event must carry either user_id or txn_instrument_id so the platform
+  can link transactions to users. Sending neither breaks the entity graph that
+  the detection rules operate over.
+downstream_objects:
+  note: >-
+    Alerts, cases, rules and regulatory filings (SAR/STR/CTR/goAML) are the
+    objects Unit21 produces from these events, and the current v1 API exposes
+    them. Their field schemas are behind the docs sign-in gate and are
+    deliberately not modelled here rather than guessed.

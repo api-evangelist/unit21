@@ -1,0 +1,44 @@
+generated: '2026-08-27'
+method: probed
+source: https://docs.unit21.ai/page/release-notes
+description: >-
+  Unit21 maintains release notes, but they are not public. The release-notes
+  page and the dated changelog entries under docs.unit21.ai/changelog/ both
+  return the customer sign-in gate to an unauthenticated fetch, and the one
+  public page named "product updates" on the marketing site carries no dated
+  entries. No ChangeLog pointer is emitted in apis.yml: doing so would credit
+  Unit21 with a published changelog that no unauthenticated reader -- human or
+  agent -- can reach.
+published: false
+gated: true
+scheme: dated-entries
+current_version: v1
+entries: []
+entry_count: 0
+probes:
+  - url: https://docs.unit21.ai/page/release-notes
+    status: 200
+    bytes: 7947
+    body_title: Sign in | Unit21
+    note: Soft-200 sign-in gate, not release notes.
+  - url: https://docs.unit21.ai/changelog
+    status: 200
+    bytes: 7947
+    body_title: Sign in | Unit21
+    note: Same gate.
+  - url: https://www.unit21.ai/product-updates
+    status: 200
+    note: >-
+      Public marketing landing page describing the platform. No dated entries,
+      no version numbers, no release history. Not a changelog.
+  - url: https://www.unit21.ai/changelog
+    status: 404
+  - url: https://www.unit21.ai/releases
+    status: 404
+note: >-
+  Historic dated entries such as
+  https://docs.unit21.ai/changelog/announcement-alert-scores-52522 are indexed
+  by public search engines, which indicates these pages were open at one time
+  and were subsequently closed. No entry content is transcribed here from a
+  search-engine cache: an entries[] list assembled from snippets would read as
+  a captured changelog when it is not one.

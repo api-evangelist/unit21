@@ -1,0 +1,72 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Probes on 2026-08-27 of https://status.unit21.ai/,
+  https://docs.unit21.ai/page/release-notes and
+  https://www.unit21.ai/product-updates.
+description: >-
+  Unit21 runs a v1 URI-versioned API and publishes release notes and a status
+  page, but BOTH operational surfaces sit behind the same customer sign-in gate
+  as the rest of the developer documentation. There is no public deprecation
+  policy, no Sunset/Deprecation header evidence and no published SLA.
+versioning:
+  scheme: uri-path
+  current_version: v1
+  policy_url: null
+  policy_published: false
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header: unknown
+  deprecation_header: unknown
+  deprecated_operations: []
+  note: >-
+    No public deprecation policy and no RFC 8594 Sunset/Deprecation header
+    evidence. No Deprecation pointer is emitted.
+status_page:
+  published: false
+  url_advertised: https://status.unit21.ai/
+  reachable: false
+  evidence:
+    - url: https://status.unit21.ai/
+      status: '<no response>'
+      note: >-
+        DNS resolves to 162.255.119.121 but the HTTPS connection times out
+        (curl exit 28, no response in 10s).
+    - url: http://status.unit21.ai/
+      status: 200
+      final_url: https://docs-login.prod1.unit21.com/?redirect=%2Fpage%2Fstatus-page
+      note: >-
+        Over plain HTTP the host redirects to Unit21's documentation login. The
+        status page is a customer-only surface, not a public one.
+  note: >-
+    The StatusPage pointer previously in apis.yml pointed at
+    https://status.unit21.ai/, which no longer answers on HTTPS and which
+    redirects to a login on HTTP. It has been REMOVED rather than left to rot:
+    a pointer asserting a public status page Unit21 does not serve publicly is
+    a false claim made on their behalf. Restore it the day the host serves an
+    anonymous status document.
+release_notes:
+  published: false
+  url: https://docs.unit21.ai/page/release-notes
+  status: 200
+  gated: true
+  note: >-
+    Returns the 7,947-byte "Sign in | Unit21" HTML gate. Unit21's public
+    marketing page https://www.unit21.ai/product-updates (HTTP 200) is a
+    product landing page with no dated entries, not a changelog.
+  see: changelog/unit21-changelog.yml
+sla:
+  published: false
+  url: null
+  note: >-
+    No public SLA. Consistent with the enterprise-only commercial model
+    recorded in plans/unit21-plans-pricing.yml -- availability commitments are
+    negotiated per contract.
+support:
+  url: https://support.unit21.ai/hc/en-us
+  status: 403
+  note: >-
+    Zendesk help centre behind a Cloudflare interstitial ("Just a moment...")
+    for non-browser clients. Treated as LIVE, not dead -- an ordinary edge
+    policy turned our crawler away, it did not report a missing page.

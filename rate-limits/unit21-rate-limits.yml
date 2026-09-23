@@ -1,3 +1,26 @@
+generated: '2026-08-27'
+method: probed
+source: https://sandbox1-api.unit21.com/v1
+limit_count: 0
+limit_count_note: >-
+  ZERO PUBLISHED LIMITS -- an honest zero, not an unchecked field. No rate
+  limit is documented on any public Unit21 surface, and none is signalled at
+  runtime.
+response_headers:
+  observed: []
+  probe:
+    url: https://sandbox1-api.unit21.com/v1/entities/list
+    method: POST
+    status: 401
+    date: '2026-08-27'
+    headers_returned: [server, date, content-length, content-type]
+  note: >-
+    Probed anonymously 2026-08-27. No X-RateLimit-*, no RateLimit-* (RFC 9331
+    draft), and no Retry-After header was returned. An agent gets no runtime
+    budget signal from this API and cannot back off intelligently; it can only
+    react to a failure after the fact.
+status_on_exhaustion: unknown
+
 name: Unit21 Rate Limits
 description: >-
   Unit21 does not publicly document specific API rate limits in their

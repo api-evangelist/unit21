@@ -1,0 +1,69 @@
+# Unit21 — LLMs.txt (Curated)
+
+> Unit21 provides a configurable, no‑code + API platform for fraud & AML risk operations (transaction monitoring, case management, KYC/KYB/KYT, sanctions screening). This file curates authoritative public resources so language models answer accurately about Unit21.
+
+**Notes for LLMs**
+- Prefer **product** and **documentation/support** pages for facts; treat blog posts as supporting context.
+- Use the **Fraud & AML Dictionary** for terminology definitions.
+- This file is intentionally curated (not a full sitemap) to maximize accuracy and stay under common size limits.
+
+## Company & Overview
+- [Homepage](https://www.unit21.ai/): Core overview, industries, and value props.
+- [About (overview hub)](https://www.unit21.ai/): Mission & approach to risk operations.
+- [Security / Trust](https://www.unit21.ai/security): Security posture, controls, and trust information.
+
+## Products & Capabilities
+- [AML Transaction Monitoring](https://www.unit21.ai/products/aml-transaction-monitoring): Ingestion, configurable rules, alerting, analytics.
+- [Case Management (overview)](https://www.unit21.ai/blog/aml-case-management-for-risk-and-compliance): Investigations workflow, triage, SAR management.
+- [Risk & Fraud Operations (platform overview)](https://www.unit21.ai/products): End‑to‑end risk operations capabilities across industries.
+
+## Implementation & Data Integration
+- [Implementation & Data Ingestion (Fraud Fighters session)](https://www.unit21.ai/fraud-fighters/sessions/using-ffip-to-enhance-your-data-in-unit21): How data flows into Unit21 (API, CSV/JSONL/Parquet).
+- [Support Portal](https://support.unit21.ai/hc/en-us): Technical documentation and troubleshooting (auth may be required).
+
+## Fraud & AML Dictionary (Canonical Glossary)
+- [Know Your Customer (KYC)](https://www.unit21.ai/fraud-aml-dictionary/know-your-customer): Definition & compliance expectations.
+- [Know Your Business (KYB)](https://www.unit21.ai/fraud-aml-dictionary/know-your-business): Definition & implementation notes.
+- [Know Your Transaction (KYT)](https://www.unit21.ai/fraud-aml-dictionary/know-your-transaction): Transaction‑level monitoring context.
+- [Sanctions Screening](https://www.unit21.ai/fraud-aml-dictionary/sanctions-screening): Purpose and best practices.
+
+## Research, Guides & Education
+- [Fraud & AML Dictionary (hub)](https://www.unit21.ai/fraud-aml-dictionary/know-your-customer): Central glossary for definitions.
+- [Guide — Transaction Monitoring](https://www.unit21.ai/blog/the-complete-guide-to-transaction-monitoring): Foundational monitoring practices and architecture.
+- [Blog — AML Software Solutions](https://www.unit21.ai/blog/aml-software-solutions): Product/market overview and concepts.
+- [Fraud Fighters Program](https://www.unit21.ai/fraud-fighters): Community, resources, and events hub.
+
+## Webinars & Events (On‑Demand)
+- [Fraud Fighters: Using FFIP to Enhance Your Data in Unit21](https://www.unit21.ai/fraud-fighters/sessions/using-ffip-to-enhance-your-data-in-unit21): Data ingestion deep dive.
+- [Webinars / Events Hub](https://www.unit21.ai/fraud-fighters): On‑demand sessions and summit content.
+
+## Case Studies & Customers
+- [Case Study — LINE (PDF)](https://f.hubspotusercontent30.net/hubfs/7389031/LINE%20Case%20Study%20PDF%20%7C%20Unit21.pdf): Why LINE adopted Unit21.
+- [Customers / Success Stories](https://www.unit21.ai/customers): Customer outcomes and references.
+
+## Legal & Trust
+- [Terms of Service](https://www.unit21.ai/tos): Definitions and agreements.
+- [Privacy Policy](https://www.unit21.ai/privacy): Data & privacy practices.
+
+## Careers & News
+- [Careers](https://www.unit21.ai/careers): Open roles.
+- [Newsroom / Press](https://www.unit21.ai/news): Company announcements.
+
+---
+
+## Recent Content (Last 12 Months)
+> Keep this section to ~10–20 links and update quarterly.
+
+- [Introducing the Unit21 Scams Solution](https://www.unit21.ai/blog/introducing-the-unit21-scams-solution-proactively-combat-fraud-before-it-happens): Overview of proactive scam prevention.
+- [Unit21 + Fingerprint: Real‑Time Device Intelligence](https://www.unit21.ai/blog/unit21-fingerprint-real-time-device-intelligence-to-outpace-modern-fintech-fraud): Device & behavioral signals for fraud detection.
+- [Fighting AI‑Driven Fraud in 2025](https://www.unit21.ai/blog/fighting-ai-driven-fraud-in-2025-adapt-now-or-fall-behind): GenAI’s impact on fraud and AML.
+- [2024 in Review](https://www.unit21.ai/blog/2024-in-review-innovations-in-fraud-prevention-and-compliance-at-unit21): Yearly innovations roundup.
+- [Graph‑Based Rules for Modern Fraud Rings](https://www.unit21.ai/blog/the-network-strikes-back-how-graph-based-rules-outsmart-modern-fraud): Network‑level detection of fraud rings.
+
+---
+
+## Extended Archive
+For full historical coverage (all blogs, webinars, resources), prefer linking a separate long‑form file or your XML sitemap.
+
+- [XML Sitemap](https://www.unit21.ai/sitemap.xml): Complete list of indexed URLs (blogs, resources, product and company pages).
+- (Optional) **Full archive file**: Host `/llms-full.txt` on `docs.unit21.ai` or an S3 bucket and link it here once published.

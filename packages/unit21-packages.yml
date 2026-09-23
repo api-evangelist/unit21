@@ -1,0 +1,87 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  Public registry searches on 2026-08-27 (registry.npmjs.org search API,
+  pypi.org JSON API, rubygems.org API v1, crates.io API v1) plus an enumeration
+  of the github.com/u21 organisation via the GitHub REST API.
+description: >-
+  Unit21 publishes no first-party client libraries in any public package
+  registry. Every registry probed returned a miss, and the six public repos in
+  the github.com/u21 organisation are forks and internal tooling, none of them
+  an SDK. Integration is direct HTTPS against the org-scoped API host with an
+  API key in the u21-key header, or batch file upload over HTTPS/SFTP.
+package_count: 0
+official_sdk_count: 0
+packages: []
+registries_probed:
+  - registry: npm
+    query: https://registry.npmjs.org/-/v1/search?text=unit21
+    status: 200
+    results: 0
+    version: null
+    published: null
+    note: >-
+      Registry answered; zero packages matched "unit21". No @unit21 scope exists.
+  - registry: pypi
+    query: https://pypi.org/pypi/unit21/json
+    status: 404
+    version: null
+    published: null
+    note: >-
+      Also probed unit21-sdk (404) and unit21-python (404).
+  - registry: rubygems
+    query: https://rubygems.org/api/v1/gems/unit21.json
+    status: 404
+    version: null
+    published: null
+    note: No gem named unit21.
+  - registry: crates.io
+    query: https://crates.io/api/v1/crates/unit21
+    status: 403
+    version: null
+    published: null
+    note: >-
+      crates.io rejected the unauthenticated probe with 403 (its default
+      user-agent policy), so this registry is UNCHECKED rather than confirmed
+      empty. An honest gap, not a confirmed absence.
+github_org:
+  url: https://github.com/u21
+  name: Unit21 Inc.
+  status: 200
+  public_repos: 6
+  first_party_sdk: false
+  repos:
+    - name: spire
+      language: Go
+      pushed: '2024-11-07'
+      note: Fork of the SPIFFE Runtime Environment. Not a Unit21 SDK.
+    - name: sqlalchemy-databricks
+      language: Python
+      pushed: '2023-11-09'
+      note: SQLAlchemy dialect for Databricks. Not a Unit21 SDK.
+    - name: buildpulse-action
+      language: Shell
+      pushed: '2022-09-16'
+      note: CI action for flaky-test detection. Not a Unit21 SDK.
+    - name: integration-docs
+      language: JavaScript
+      pushed: '2022-07-22'
+      note: >-
+        Slate static-site source for Unit21's API integration documentation,
+        described by the repo itself as "NEEDS REVISION". Real first-party data
+        model content (see data-model/unit21-data-model.yml) but not a client
+        library, and its errors page is unedited Slate boilerplate.
+    - name: examples
+      pushed: '2022-02-23'
+      note: Example task code for Airplane.dev. Not a Unit21 SDK.
+    - name: ipsum
+      pushed: '2022-02-23'
+      note: Daily feed of bad IPs. Not a Unit21 SDK.
+notes:
+  - >-
+    No SDKs pointer is emitted in apis.yml because no official client library
+    was found. Emitting one would credit Unit21 with libraries it does not ship.
+  - >-
+    Unit21's own docs host (docs.unit21.ai) is behind an email sign-in gate as
+    of 2026-08-27, so if an SDK is distributed to customers privately it is not
+    visible to an unauthenticated search.

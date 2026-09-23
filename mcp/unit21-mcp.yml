@@ -1,0 +1,61 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Web search for a Unit21 MCP server, probe of mcp.unit21.ai / mcp.unit21.com
+  (DNS does not resolve), tools/list POST against the API hosts, and a read of
+  https://www.unit21.ai/integrations on 2026-08-27.
+name: Unit21
+status: none
+description: >-
+  Unit21 does not publish a Model Context Protocol server. Unit21 writes and
+  markets about MCP -- its blog carries "What Is MCP? The Model Context
+  Protocol, Explained" and its product marketing describes agentic AI that
+  answers questions about the customer's own fraud typologies -- but no MCP
+  endpoint, no npx/pip-installable stdio package, and no published tool
+  manifest could be found on any Unit21 host. No MCPServer pointer is emitted.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: probed
+probes:
+  - url: https://mcp.unit21.ai/mcp
+    method: POST tools/list
+    status: '<no response>'
+    note: Hostname does not resolve.
+  - url: https://mcp.unit21.com/mcp
+    method: POST tools/list
+    status: '<no response>'
+    note: Hostname does not resolve.
+  - url: https://api.unit21.com/mcp
+    method: POST tools/list
+    status: 401
+    note: >-
+      The AWS ELB in front of the API returns {"error_code":"unauthorized"} for
+      every path, so this 401 is the host default and NOT evidence of an MCP
+      endpoint behind auth.
+  - url: https://sandbox1-api.unit21.com/mcp
+    method: POST tools/list
+    status: 401
+    note: Same host-default 401 as above.
+  - url: https://www.unit21.ai/integrations
+    method: GET
+    status: 200
+    note: >-
+      Lists ~40 named data, core-banking, KYC and blockchain-analytics
+      integrations (Snowflake, Databricks, Fiserv, Jack Henry, Plaid, Persona,
+      Socure, Chainalysis, TRM Labs, Zendesk, Salesforce and others). None is an
+      MCP server; all are inbound data connectors.
+tools: []
+derived_from_openapi: false
+derivation_note: >-
+  A candidate tool list could not be derived: Unit21 publishes no OpenAPI, and
+  the API reference that would name its operations is behind a sign-in gate at
+  docs.unit21.ai as of 2026-08-27. Deriving tool names from marketing copy would
+  be fabrication, so tools[] is deliberately empty.
+references:
+  - title: What Is MCP? The Model Context Protocol, Explained
+    url: https://www.unit21.ai/blog/what-is-mcp-the-model-context-protocol-explained
+    note: Unit21 editorial about MCP, not a Unit21 MCP server.

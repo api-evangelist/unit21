@@ -1,0 +1,127 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://www.unit21.ai/security and https://www.unit21.ai/products/regulatory-filing
+  (both HTTP 200, fetched 2026-08-27), plus live probes of the API and
+  /.well-known surfaces.
+description: >-
+  Unit21 sits in a market that HAS domain standards -- regulatory filing formats
+  for financial-crime reporting -- and it claims support for several of them on
+  its own product pages. What it does not do is declare any of them in a
+  machine-readable contract, because it publishes no contract: there is no
+  OpenAPI, no AsyncAPI, no GraphQL SDL, and the API reference that might carry
+  the declaration is behind a sign-in gate. The distinction is recorded
+  explicitly below so a reader can tell a marketing claim from a spec signature.
+cross_cutting:
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      Static API key in a u21-key header; no authorization server. Probed
+      /.well-known/oauth-authorization-server on all hosts: 404 (www), 401 (api),
+      404 (docs).
+  - id: oidc
+    conforms: false
+    evidence: >-
+      /.well-known/openid-configuration returned 404 on www.unit21.ai and
+      docs.unit21.ai and 401 on sandbox1-api.unit21.com.
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      Observed error body is {"error_code":"unauthorized"} with content-type
+      application/json, not application/problem+json. See
+      errors/unit21-problem-types.yml.
+  - id: rfc9116
+    conforms: false
+    evidence: /.well-known/security.txt returned 404 (www) and no document on any host.
+  - id: rfc8615
+    conforms: false
+    evidence: >-
+      No /.well-known document served on any host; docs.unit21.ai answers 200
+      with an HTML sign-in gate for arbitrary /.well-known paths, which is a
+      catch-all, not a discovery surface.
+  - id: idempotency
+    conforms: unknown
+    evidence: Not documented on any public surface; see conventions/unit21-conventions.yml.
+  - id: pagination
+    conforms: unknown
+    evidence: Not observable anonymously; list endpoints return the edge 401.
+  - id: tls
+    conforms: true
+    evidence: >-
+      HTTPS enforced on all hosts; see security/unit21-domain-security.yml for
+      the probed TLS/HSTS/DNSSEC/CAA/SPF/DMARC record.
+domain_standards:
+  market: financial-crime compliance / AML regulatory reporting
+  nearest_scored_regime: banking_open_finance
+  contract_declaration: none
+  contract_declaration_note: >-
+    REWARD-ONLY CHECK, NOT AWARDED. domain_standard_conformance reads the
+    CONTRACT -- a schema URN, a message type, a metadata surface, a declared
+    endpoint shape. Unit21 publishes no machine-readable contract at all, so
+    there is no spec location to point evidence at. The claims below are read
+    from Unit21's own product page and are recorded as claims, deliberately
+    NOT as a conformance signature.
+  claimed:
+    - id: fincen-sar
+      name: FinCEN Suspicious Activity Report (SAR)
+      claimed: true
+      declared_in_contract: false
+      evidence:
+        url: https://www.unit21.ai/products/regulatory-filing
+        status: 200
+        quote: >-
+          "Submit SARs and CTRs directly to FinCEN, STRs to FINTRAC, and
+          automate submissions to 45+ other countries via goAML, all from
+          within Unit21, with no external portals or manual effort."
+    - id: fincen-ctr
+      name: FinCEN Currency Transaction Report (CTR)
+      claimed: true
+      declared_in_contract: false
+      evidence:
+        url: https://www.unit21.ai/products/regulatory-filing
+        status: 200
+    - id: goaml
+      name: UNODC goAML STR
+      claimed: true
+      declared_in_contract: false
+      evidence:
+        url: https://www.unit21.ai/products/regulatory-filing
+        status: 200
+        quote: 'goAML STRs for 45+ countries'
+    - id: fintrac-str
+      name: FINTRAC Suspicious Transaction Report (Canada)
+      claimed: true
+      declared_in_contract: false
+      evidence:
+        url: https://www.unit21.ai/products/regulatory-filing
+        status: 200
+    - id: car
+      name: Continuing Activity Report (CAR)
+      claimed: true
+      declared_in_contract: false
+      evidence:
+        url: https://www.unit21.ai/products/regulatory-filing
+        status: 200
+  probed_and_absent:
+    - id: iso-20022
+      note: >-
+        Not claimed and not observable. Unit21 consumes transaction events in
+        its own flexible schema (see data-model/), not ISO 20022 messages.
+    - id: fapi
+      note: Not applicable; no OAuth surface.
+compliance:
+  certifications:
+    - name: SOC 2
+      source: https://www.unit21.ai/security
+    - name: GDPR
+      source: https://www.unit21.ai/security
+  source: https://www.unit21.ai/security
+  status: 200
+  see: security/unit21-trust-center.yml
+gaps:
+  - >-
+    Unit21 files SARs, CTRs, STRs and goAML reports on behalf of regulated
+    institutions but declares none of those formats in a machine-readable
+    contract. An integrator who already speaks goAML XML cannot tell from any
+    public artifact whether Unit21's filing surface matches theirs.
+  - No security.txt, so there is no machine-readable disclosure channel.

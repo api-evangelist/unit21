@@ -1,0 +1,59 @@
+generated: '2026-08-27'
+method: probed
+source: https://sandbox1-api.unit21.com/v1
+description: >-
+  Unit21 returns a compact custom JSON error envelope, not RFC 9457
+  application/problem+json. The only error observed anonymously is the edge
+  401; the full error-code registry is not public because the API reference is
+  behind a sign-in gate at docs.unit21.ai as of 2026-08-27. This catalog records
+  what was actually observed and nothing more.
+format: custom-json
+rfc9457: false
+content_type: application/json
+envelope:
+  shape: '{"error_code": "<slug>"}'
+  fields:
+    - name: error_code
+      type: string
+      description: >-
+        Lowercase snake_case slug naming the failure class. No human-readable
+        message, no type URI, no instance identifier, and no per-field detail
+        accompanies it in the observed response.
+  missing_from_envelope:
+    - type
+    - title
+    - detail
+    - instance
+    - status
+    - trace/request id
+problem_types:
+  - code: unauthorized
+    http_status: 401
+    title: Unauthorized
+    detail: >-
+      Request carried no valid u21-key header. Returned by the AWS ELB in front
+      of the API for every path, including / and /.well-known/*, so it is also
+      the response an agent gets when probing for discovery documents.
+    remediation: >-
+      Send a valid organization-scoped API key in the u21-key header over HTTPS.
+      Generate one from Unit21 Dashboard -> Data Management -> Integrations.
+    observed:
+      url: https://sandbox1-api.unit21.com/v1/entities/list
+      method: POST
+      status: 401
+      body: '{"error_code":"unauthorized"}'
+      date: '2026-08-27'
+coverage:
+  observed_codes: 1
+  documented_codes: 0
+  note: >-
+    A published error-code registry could not be found. The one error page in
+    Unit21's public GitHub org (u21/integration-docs, source/includes/_errors.md)
+    is UNEDITED SLATE TEMPLATE BOILERPLATE -- it documents the fictional "Kittn
+    API" and its kittens, not Unit21 -- and must not be mistaken for a Unit21
+    error catalog. The repo's own description says "NEEDS REVISION".
+gaps:
+  - No RFC 9457 problem+json; agents cannot type-match failures across providers.
+  - No human-readable message field, so a failure cannot be surfaced to a user without a lookup table.
+  - No request/trace identifier in the error body to quote in a support ticket.
+  - No public error-code reference to build that lookup table from.

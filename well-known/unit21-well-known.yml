@@ -1,0 +1,116 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Direct HTTP probes of /.well-known/ paths on every host named in apis.yml
+  (Website, Documentation, baseURL) on 2026-08-27.
+description: >-
+  Unit21 serves no /.well-known discovery surface. The marketing host answers a
+  hard 404 for every path; the API host answers 401 for every path (the AWS ELB
+  in front of it rejects unauthenticated requests before routing, so a
+  .well-known document could not be served anonymously even if one existed);
+  and the documentation host is a soft-200 catch-all that returns the same
+  7,947-byte "Sign in | Unit21" HTML gate for every path, including paths that
+  cannot exist. NO WellKnown or SecurityTxt pointer is emitted from this file --
+  nothing was fetched and nothing was saved.
+hit_count: 0
+hosts:
+  - host: https://www.unit21.ai
+    note: Marketing host. Hard 404 with an 88-byte HTML body on every path.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: https://sandbox1-api.unit21.com
+    note: >-
+      API host (server: awselb/2.0). Returns HTTP 401 with the 29-byte body
+      {"error_code":"unauthorized"} for every path including / and
+      /.well-known/*. No WWW-Authenticate header is returned.
+    documents:
+      - path: /.well-known/security.txt
+        status: 401
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 401
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 401
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 401
+        file: null
+      - path: /.well-known/api-catalog
+        status: 401
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 401
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 401
+        file: null
+      - path: /.well-known/agent.json
+        status: 401
+        file: null
+  - host: https://docs.unit21.ai
+    note: >-
+      SOFT-200 CATCH-ALL -- do not promote any 200 on this host into a document.
+      Four of the eight probes returned HTTP 200 with an identical 7,947-byte
+      HTML body titled "Sign in | Unit21" ("Use your email to request access").
+      The other four returned an empty 404. Nothing was fetched, nothing saved.
+    soft_404_control:
+      path: /docs/nonexistent-zzz-control
+      status: 200
+      bytes: 7947
+      body_title: Sign in | Unit21
+      note: >-
+        A path that cannot exist returns the same gate page as a real path,
+        which is what makes every 200 on this host a miss rather than a hit.
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        file: null
+        note: soft-200 HTML sign-in gate, 7947 bytes -- not a document
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        file: null
+        note: soft-200 HTML sign-in gate, 7947 bytes -- not a document
+      - path: /.well-known/agent-card.json
+        status: 200
+        file: null
+        note: soft-200 HTML sign-in gate, 7947 bytes -- not a document
+      - path: /.well-known/agent.json
+        status: 200
+        file: null
+        note: soft-200 HTML sign-in gate, 7947 bytes -- not a document

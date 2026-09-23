@@ -1,3 +1,30 @@
+generated: '2026-08-27'
+method: searched
+source: https://www.unit21.ai/products/regulatory-filing
+sources_probed:
+  - url: https://www.unit21.ai/pricing
+    status: 404
+    note: Unit21 publishes no pricing page.
+  - url: https://www.unit21.ai/
+    status: 200
+    note: >-
+      The homepage was previously wired into apis.yml as the Pricing pointer.
+      It carries no prices, no tiers and no quotas -- a marketing root
+      masquerading as a pricing page -- so that pointer has been removed rather
+      than left standing as a claim Unit21 does not make.
+  - url: https://www.unit21.ai/schedule-demo
+    status: 200
+    note: The only public commercial route is a demo request form.
+plan_count: 0
+public_plans: false
+plan_count_note: >-
+  ZERO PUBLISHED PLANS, honestly recorded rather than omitted. Unit21 is
+  enterprise contract-only: no tier, price, quota or overage is published
+  anywhere on its public site. The contract-value ranges below come from
+  third-party buyer-guide aggregators (Vendr, TrustRadius), NOT from Unit21,
+  and are labelled as such in sources[] -- they are market observations, not
+  a published price list.
+
 name: Unit21 Plans and Pricing
 description: >-
   Unit21 uses custom enterprise pricing based on organization size, transaction

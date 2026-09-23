@@ -1,0 +1,129 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Live probes of https://sandbox1-api.unit21.com on 2026-08-27, plus the public
+  search index of the now-gated docs.unit21.ai reference pages, plus
+  https://github.com/u21/integration-docs (Unit21's own public Slate source).
+description: >-
+  Cross-cutting runtime semantics for the Unit21 API. This provider is
+  unusually hard to characterise for an agent: the transport, auth and error
+  envelope are observable from the edge, but idempotency, pagination,
+  versioning policy, request tracing and reversibility are all documented only
+  behind an email sign-in gate on docs.unit21.ai. Where a convention could not
+  be established from a public surface it is recorded as unknown with the wall
+  that blocked it -- never guessed.
+auth:
+  style: api-key-header
+  header: u21-key
+  scheme: null
+  scopes: false
+  optional_payload_encryption:
+    header: u21-fernet
+    algorithm: Fernet (128-bit AES-CBC, PKCS7 padding, HMAC-SHA256)
+  see: authentication/unit21-authentication.yml
+transport:
+  https_required: true
+  base_url_sandbox: https://sandbox1-api.unit21.com/v1
+  base_url_production: https://{org_name}-api.unit21.com/v1
+  base_url_is_tenant_scoped: true
+  note: >-
+    The production host embeds the customer's organization name. An agent
+    cannot construct the base URL from the vendor domain alone; it must be
+    issued at onboarding.
+versioning:
+  style: uri-path
+  current: v1
+  evidence: The published base URL is .../v1.
+  policy_published: false
+  policy_note: >-
+    No public versioning or breaking-change policy. The release-notes page
+    exists at https://docs.unit21.ai/page/release-notes but returns the
+    sign-in gate (HTTP 200, 7947-byte HTML) to an unauthenticated fetch.
+idempotency:
+  supported: unknown
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    UNKNOWN, NOT ABSENT. Unit21's API is a high-volume ingestion surface where
+    duplicate suppression matters, and the caller-supplied txn_id / user_id
+    fields in the documented event schema are natural dedupe keys -- but no
+    idempotency header, no replay window and no documented duplicate-handling
+    behaviour could be found on a public surface. No Idempotency pointer is
+    emitted in apis.yml, because asserting support we could not observe would
+    be a claim made on Unit21's behalf.
+pagination:
+  style: unknown
+  request_params: []
+  response_fields: []
+  note: >-
+    Not observable anonymously; every list endpoint returns the edge 401. The
+    API reference that would document it is gated.
+field_expansion:
+  supported: unknown
+sparse_fieldsets:
+  supported: unknown
+metadata:
+  custom_fields: true
+  note: >-
+    Unit21 ships a documented three-tier field model rather than a metadata
+    bag: REQUIRED fields (rejected if absent), RESERVED fields (accepted,
+    given first-class risk processing), and CUSTOM fields (any caller-defined
+    key not colliding with a required or reserved name). This is a real and
+    unusual convention and is captured in full in
+    data-model/unit21-data-model.yml.
+  source: https://github.com/u21/integration-docs/blob/master/source/includes/_data_types.md
+request_id_tracing:
+  supported: false
+  observed: >-
+    No request-id, trace-id or correlation header was returned on the probed
+    401 response; the only headers were server, date, content-length and
+    content-type.
+error_envelope:
+  format: custom-json
+  shape: '{"error_code": "<slug>"}'
+  rfc9457: false
+  see: errors/unit21-problem-types.yml
+rate_limit_signaling:
+  headers_observed: []
+  status_on_exhaustion: unknown
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header was present on any
+    probed response. Limits are contractual rather than published.
+  see: rate-limits/unit21-rate-limits.yml
+reversibility:
+  grade: unknown
+  has_write_surface: true
+  write_surface_note: >-
+    Unit21 is not read-only. Its API ingests entities, instruments and events,
+    and creates and mutates alerts, cases, rules and regulatory filings
+    (SAR/STR/CTR/goAML) -- filings that are transmitted to a regulator and are
+    exactly the class of action an agent most needs to know it can take back.
+  reversal_operations: []
+  window: null
+  window_source: null
+  note: >-
+    NOT `na` and NOT `documented`. No cancel/void/reverse/restore operation and
+    no reversal window could be established from any public Unit21 surface,
+    because the API reference is behind an email sign-in gate. The _REFUND and
+    _CORRECTION values in Unit21's public event-type list are INBOUND
+    transaction classifications the customer reports about their own payment
+    system -- they are not reversal operations on Unit21's API and must not be
+    read as such. No window is asserted here: an invented reversal window on a
+    regulatory-filing surface is the single most expensive error this artifact
+    could contain.
+  blocked_by:
+    url: https://docs.unit21.ai/reference/api-reference
+    status: 200
+    detail: 7,947-byte "Sign in | Unit21" HTML gate returned to unauthenticated fetch
+dry_run_mode:
+  supported: unknown
+  note: >-
+    Unit21 markets rule backtesting/simulation in the product UI, but no
+    dry-run or validate-only parameter is documented on a public API surface.
+cross_links:
+  authentication: authentication/unit21-authentication.yml
+  errors: errors/unit21-problem-types.yml
+  lifecycle: lifecycle/unit21-lifecycle.yml
+  rate_limits: rate-limits/unit21-rate-limits.yml
+  data_model: data-model/unit21-data-model.yml
