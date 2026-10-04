@@ -37,13 +37,12 @@ created: "2026-06-13"
 modified: "2026-08-27"
 specificationVersion: '0.23'
 tags:
-  - Fraud Detection
+  - Fraud Prevention
   - AML
-  - Anti-Money Laundering
   - Compliance
   - Fintech
   - Transaction Monitoring
-  - Risk
+  - Risk Management
   - SAR
   - Financial Crime
   - Suspicious Activity Reports
@@ -69,6 +68,15 @@ apis:
     humanURL: https://docs.unit21.ai/reference/api-reference
     baseURL: https://sandbox1-api.unit21.com/v1
     tags:
+      - Fraud Prevention
+      - AML
+      - Transaction Monitoring
+      - Alerts
+      - Cases
+      - Entities
+      - Rules
+      - SAR
+    tags_raw:
       - Fraud Detection
       - AML
       - Transaction Monitoring
