@@ -105,6 +105,8 @@ apis:
         url: https://support.unit21.ai/hc/en-us
         email: security@unit21.ai
 common:
+  - type: Pricing
+    url: https://www.unit21.ai/products/regulatory-filing
   - type: TrustCenter
     url: security/unit21-trust-center.yml
   - type: VulnerabilityDisclosure
